@@ -1,4 +1,7 @@
 FROM bcapuano/atheris:2.1.1-python3.10
+RUN \
+  apt-get update && \
+  apt-get install -y git
 
 ADD . /src
 WORKDIR /src
