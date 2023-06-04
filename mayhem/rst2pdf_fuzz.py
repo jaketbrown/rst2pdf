@@ -11,13 +11,13 @@ with atheris.instrument_imports(include=['rst2pdf']):
 def TestOneInput(data):
     global r2p
     fdp = atheris.FuzzedDataProvider(data)
-    consumed_bytes = fdp.ConsumeBytes(fdp.remaining_bytes())
+    consumed_bytes = fdp.ConsumeString(fdp.ConsumeIntInRange(0, fdp.remaining_bytes()))
     try:
-        file = io.BytesIO(consumed_bytes)
         r2p.createPdf(
-            text=file.read(),
+            text=consumed_bytes,
             output='/dev/null',
             source_path=None,
+            debugLinesPdf=False
         )
     except Exception:
         raise
