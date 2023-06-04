@@ -20,7 +20,7 @@ def TestOneInput(data):
             source_path=None,
         )
     except Exception:
-        return
+        raise
 
 def main():
     atheris.Setup(sys.argv, TestOneInput)
